@@ -10,4 +10,6 @@ theme:
   - github.com/adityatelange/hugo-PaperMod
 
 disqusShortname: mrobee-github-io
-comments: true
+params:
+  env: production
+  comments: true
