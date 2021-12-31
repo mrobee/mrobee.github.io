@@ -19,7 +19,7 @@ The only way to create the connection is through the Airflow CLI. Since our Airf
 Here's the Airflow CLI command to create the connection.
 
 ```bash
-airflow connections add --conn-extra='{"kubernetes__in__cluster":true,"kubernetes__namespace":"the-default-namespace-to-use"}' --conn-host='' --conn-type=kubernetes kubernetes_default
+airflow connections add --conn-extra='{"extra__kubernetes__in_cluster":true,"extra__kubernetes__namespace":"the-default-namespace-to-use"}' --conn-host='' --conn-type=kubernetes kubernetes_default
 ```
 
 Basically, we need to provide the `--conn-type=kubernetes`, `--conn-host=''`, the connection ID, and the connection extras. If you decide to use other options, you need to provide that option in the extras.
@@ -27,13 +27,15 @@ Basically, we need to provide the `--conn-type=kubernetes`, `--conn-host=''`, th
 To use the kube config path, provide the extras with
 
 ```json
-{ "kubernetes__kube_config_path": "path_to_kube_config" }
+{ "extra__kubernetes__kube_config_path": "path_to_kube_config" }
 ```
 
 Or if you want, you can pass the content of the kube config directly in the extras
 
 ```json
-{ "kubernetes__kube_config": "content_of_kube_config_in_json_format" }
+{ "extra__kubernetes__kube_config": "content_of_kube_config_in_json_format" }
 ```
+
+This configuration is extracted from the [source code](https://github.com/apache/airflow/blob/main/airflow/providers/cncf/kubernetes/hooks/kubernetes.py).
 
 That's it! Now we're ready to use the SparkKubernetesOperator.
